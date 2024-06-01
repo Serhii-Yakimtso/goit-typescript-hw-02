@@ -6,7 +6,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import ImageModal from '../ImageModal/ImageModal';
-import './App.css';
+import './App.module.css';
 
 function App() {
   const [query, setQuery] = useState('');
