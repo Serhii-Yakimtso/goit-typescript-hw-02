@@ -1,11 +1,11 @@
 import { MagnifyingGlass } from 'react-loader-spinner';
 import css from './Loader.module.css';
+import { string } from 'yup';
 
 export default function Loader() {
   return (
     <div>
       <MagnifyingGlass
-        className={css.icon}
         visible={true}
         height="80"
         width="80"
