@@ -1,10 +1,16 @@
 import toast, { Toaster } from 'react-hot-toast';
+import { FC, FormEvent } from 'react';
 import css from './SearchBar.module.css';
 
-export default function SearchBar({ onSearch }) {
-  const handleSubmit = e => {
+interface SearchProps {
+  onSearch: (value: string) => void;
+}
+
+export const SearchBar: FC<SearchProps> = ({ onSearch }) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const value = e.target.elements.search.value;
+    const form = e.target as HTMLFormElement
+    const value = (form.elements.namedItem("search") as HTMLInputElement).value.trim();
     if (value.length === 0) {
       toast.error('Please, type a tag');
       return;

@@ -1,6 +1,10 @@
+import { FC } from 'react';
+import { Img } from '../../types';
 import css from './ImageCard.module.css';
 
-export default function ImageCard({ card, onClick }) {
+interface ImageCardProps { card: Img; onClick: (src: string) => void }
+
+export const ImageCard: FC<ImageCardProps> = ({ card, onClick }) => {
   return (
     <div>
       <img

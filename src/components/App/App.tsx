@@ -1,37 +1,38 @@
 import { useState, useEffect } from 'react';
-import SearchBar from '../SearchBar/SearchBar';
-import ImageGallery from '../ImageGallery/ImageGallery';
 import { fetchImgGallery } from '../../api';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { ImageGallery } from '../ImageGallery/ImageGallery';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
-import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
-import ImageModal from '../ImageModal/ImageModal';
+import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
+import { ImageModal } from '../ImageModal/ImageModal';
+import { Img } from '../../types';
 import './App.module.css';
 
 function App() {
-  const [query, setQuery] = useState('');
-  const [img, setImg] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [isModal, setIsModal] = useState(false);
-  const [modalImg, setModalImg] = useState([]);
+  const [query, setQuery] = useState<string>('');
+  const [img, setImg] = useState<Img[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [modalImg, setModalImg] = useState<string>('');
 
-  const handleSearch = value => {
+  const handleSearch = (value: string): void => {
     setQuery(value);
     setPage(1);
     setImg([]);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage(page + 1);
   };
 
-  const handleToggleModal = () => {
+  const handleToggleModal = (): void => {
     setIsModal(!isModal);
   };
 
-  const handleGetSrcModalImg = src => {
+  const handleGetSrcModalImg = (src: string): void => {
     setModalImg(src);
     handleToggleModal();
   };
@@ -45,7 +46,7 @@ function App() {
         setError(false);
         setIsLoading(true);
         const data = await fetchImgGallery(query, page);
-        setImg(prevImg => {
+        setImg((prevImg): Img[] => {
           return [...prevImg, ...data];
         });
       } catch (error) {
